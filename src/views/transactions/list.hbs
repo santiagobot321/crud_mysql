@@ -1,0 +1,44 @@
+<h3>Transactions list</h3>
+{{#if transactions}}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each transactions}}
+                <tr>
+                    <td>{{date_tra}}</td>
+                    <td>{{hour_tra}}</td>
+                    <td>{{amount}}</td>
+                    <td>{{status_tra}}</td>
+                    <td>{{type_tra}}</td>
+                    <td>
+                        <div>
+                            <a href="/edit/{{id}}">Editar</a>
+                            <a href="/delete/{{id}}">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+        <tfoot>
+            <tr></tr>
+            <td>Transactions register</td>
+        </tfoot>
+    </table>
+{{else}}
+    <div>
+        <h3>You need to make a transaction</h3>
+    </div>
+    <div>
+        <p>Click to make a transaction</p>
+        <a href="/add">Make a transaction</a>
+    </div>
+{{/if}}

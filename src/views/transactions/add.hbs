@@ -1,0 +1,42 @@
+<div>
+    <h3>Make a new transaction</h3>
+</div>
+<div>
+    <form action="/add" method="post">
+        <div>
+            <label for="date_tra">Date</label>
+            <input type="date" name="date_tra" id="date_tra" autofocus required>
+        </div>
+
+        <div>
+            <label for="hour_tra">Hour transaction</label>
+            <input type="time" name="hour_tra" id="hour_tra" required>
+        </div>
+
+        <div>
+            <label for="amount">amount</label>
+            <input type="number" name="amount" id="amount" required>
+        </div>
+
+        <div>
+            <label for="status_tra">Status</label>
+            <select name="status_tra" id="status_tra">
+                <option value="Pending">Pending</option>
+                <option value="Failed">Failed</option>
+                <option value="Completed">Completed</option>
+            </select>
+        </div>        
+
+        <div>
+            <label for="type_tra">type</label>
+            <select name="type_tra" id="type_tra">
+                <option value="Bill payment">Bill payment</option>
+                <option value="Deposit">Deposit</option>
+                <option value="Withdrawal">Withdrawal</option>
+            </select>
+        </div>
+
+        <button>Make a transaction</button>
+    
+    </form>
+</div>

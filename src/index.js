@@ -5,7 +5,7 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import session from "express-session";
 
-import personasRoutes from "./routes/personas.routes.js";
+import transactionsRoutes from "./routes/transactions.routes.js";
 import usersRoutes from "./routes/users.routes.js";
 
 const app = express();
@@ -46,7 +46,7 @@ app.use(express.static(join(__dirname, "public")));
 // Rutas
 app.get("/", (req, res) => res.render("index"));
 app.use(usersRoutes);
-app.use(personasRoutes);
+app.use(transactionsRoutes);
 
 // Arrancar servidor
 app.listen(app.get("port"), () =>

@@ -6,15 +6,15 @@ const router = Router();
 
 // Formulario para agregar persona
 router.get('/add', isLoggedIn, (req, res) => {
-    res.render('personas/add');
+    res.render('transactions/add');
 });
 
 // Guardar nueva persona
 router.post('/add', isLoggedIn, async (req, res) => {
     try {
-        const { name, lastname, age } = req.body;
-        const nuevaPersona = { name, lastname, age };
-        await pool.query('INSERT INTO personas SET ?', [nuevaPersona]);
+        const { date_tra, hour_tra, amount, status_tra, type_tra } = req.body;
+        const newTransaction = { date_tra, hour_tra, amount, status_tra, type_tra };
+        await pool.query('INSERT INTO transactions SET ?', [newTransaction]);
         res.redirect('/list');
     }
     catch (error) {
@@ -25,8 +25,8 @@ router.post('/add', isLoggedIn, async (req, res) => {
 // Listar personas
 router.get('/list', isLoggedIn, async (req, res) => {
     try {
-        const [result] = await pool.query('SELECT * FROM personas');
-        res.render('personas/list', { personas: result });
+        const [result] = await pool.query('SELECT * FROM transactions');
+        res.render('transactions/list', { transactions: result });
     }
     catch (error) {
         res.status(500).json({ message: error.message });
@@ -37,9 +37,9 @@ router.get('/list', isLoggedIn, async (req, res) => {
 router.get('/edit/:id', isLoggedIn, async (req, res) => {
     try {
         const { id } = req.params;
-        const [persona] = await pool.query('SELECT * FROM personas WHERE id = ?', [id]);
-        const personaEdit = persona[0];
-        res.render('personas/edit', { persona: personaEdit });
+        const [transaction] = await pool.query('SELECT * FROM transactions WHERE id = ?', [id]);
+        const transEdit = transaction[0];
+        res.render('transactions/edit', { transaction: transEdit });
     }
     catch (error) {
         res.status(500).json({ message: error.message });
@@ -49,10 +49,10 @@ router.get('/edit/:id', isLoggedIn, async (req, res) => {
 // Guardar edición persona
 router.post('/edit/:id', isLoggedIn, async (req, res) => {
     try {
-        const { name, lastname, age } = req.body;
+        const { date_tra, hour_tra, amount, status_tra, type_tra } = req.body;
         const { id } = req.params;
-        const editPersona = { name, lastname, age };
-        await pool.query('UPDATE personas SET ? WHERE id = ?', [editPersona, id]);
+        const editTransaction = { date_tra, hour_tra, amount, status_tra, type_tra };
+        await pool.query('UPDATE transactions SET ? WHERE id = ?', [editTransaction, id]);
         res.redirect('/list');
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -63,7 +63,7 @@ router.post('/edit/:id', isLoggedIn, async (req, res) => {
 router.get('/delete/:id', isLoggedIn, async (req, res) => {
     try {
         const { id } = req.params;
-        await pool.query('DELETE FROM personas WHERE id = ?', [id]);
+        await pool.query('DELETE FROM transactions WHERE id = ?', [id]);
         res.redirect('/list');
     } catch (error) {
         res.status(500).json({ message: error.message });
