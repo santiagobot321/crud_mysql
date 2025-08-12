@@ -1,0 +1,12 @@
+<nav>
+    {{#if isLoggedIn}}
+        <a href="/add">Agregar persona</a>
+        <a href="/list">Ver personas</a>
+        <a href="/logout">Cerrar sesión ({{username}})</a>
+    {{else}}
+        <a href="/login">Iniciar sesión</a>
+        <a href="/register">Registrarse</a>
+    {{/if}}
+</nav>
+
+{{{body}}}
